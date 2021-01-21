@@ -10,9 +10,9 @@ You will administer these appointments through your database, it is set up to re
 
 ---
 <p align="center">
-  <img src="client\src\assets\screenshot(1).png" width="350" alt="screenshot">
-  <img src="client\src\assets\screenshot(2).png" width="350" alt="screenshot">
-  <img src="client\src\assets\screenshot(3).png" width="350" alt="screenshot">
+  <img src="client\src\assets\screenshot(1).png" width="450" alt="screenshot">
+  <img src="client\src\assets\screenshot(2).png" width="450" alt="screenshot">
+  <img src="client\src\assets\screenshot(3).png" width="450" alt="screenshot">
 </p>
 
 ## Requirements
