@@ -8,8 +8,10 @@ This SPA renders a form in which your clients or users can make appointments to 
 
 You will administer these appointments through your database, it is set up to receive three appointments per hour and it's connected to MySQL database, set it up whatever you like :thumbsup:
 
-<!-- ---
-![Logo](client\src\assets\logo.png?raw=true "Title") -->
+---
+<p align="center">
+  <img src="client\src\assets\logo.png" width="350" title="hover text">
+</p>
 
 ## Requirements
 
