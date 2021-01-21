@@ -15,8 +15,7 @@ You will administer these appointments through your database, it is set up to re
 
 ## Requirements
 
-Node.js v14.6.0
-MySQL database
+Node.js v14.6.0 | MySQL database
 
 <!-- ## Installation
 

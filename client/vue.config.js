@@ -9,8 +9,8 @@ const path = require('path')
  */
 
 module.exports = {
-  // uncomment outputDir for production.
-  outputDir: path.resolve(__dirname, '../server/public'),
+  // Uncomment outputDir for production.
+  // outputDir: path.resolve(__dirname, '../server/public'),
   devServer: {
     proxy: {
       '/post': {
