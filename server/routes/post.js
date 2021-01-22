@@ -16,6 +16,7 @@ var con = mysql.createConnection({
 });
 
 // Get
+// cool library is for heroku testing purposes.
 router.get('/cool', (req, res) => res.send(cool()));
 
 // Post
