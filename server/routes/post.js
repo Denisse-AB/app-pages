@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
+const cool = require('cool-ascii-faces');
 const MailService = require("../MailService");
 const mailService = new MailService();
 
@@ -14,7 +15,10 @@ var con = mysql.createConnection({
     database: process.env.DB_DATABASE
 });
 
-//post
+// Get
+router.get('/cool', (req, res) => res.send(cool()));
+
+// Post
 router.post('/', (req, res) => {
     const email = req.body.email;
     const name = req.body.name;
