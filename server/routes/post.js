@@ -1,8 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
-const cool = require('cool-ascii-faces');
-const MailService = require("../MailService");
+const MailService = require("../mail-service");
 const mailService = new MailService();
 
 const router = express.Router();
@@ -14,10 +13,6 @@ var con = mysql.createConnection({
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE
 });
-
-// Get
-// cool library is for heroku testing purposes.
-router.get('/cool', (req, res) => res.send(cool()));
 
 // Post
 router.post('/', (req, res) => {

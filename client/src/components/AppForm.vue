@@ -113,7 +113,7 @@
 import { BFormInput, BFormDatepicker, BButton } from 'bootstrap-vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ValidationProvider } from 'vee-validate'
-import PostService from '../PostService'
+import PostService from '../post-service'
 import '../validation'
 
 export default {
