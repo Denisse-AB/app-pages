@@ -1,17 +1,18 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql');
+const { Pool } = require('pg');
 const MailService = require("../mail-service");
 const mailService = new MailService();
 
 const router = express.Router();
 
 // database conection
-var con = mysql.createConnection({
-    host: process.env.DB_HOST,
+const pool = new Pool({
     user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
     password: process.env.DB_PASS,
-    database: process.env.DB_DATABASE
+    port: process.env.DB_PORT
 });
 
 // Post
@@ -23,23 +24,23 @@ router.post('/', (req, res) => {
     const selected = req.body.selected;
     const lang =req.body.lang;
     var created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    const count = "SELECT time, date FROM appointments WHERE time = '"+selected+"' AND date = '"+date+"'";
+    const count = "SELECT COUNT(*) FROM appointments WHERE date = '" + date + "' AND time = '" + selected + "'";
     const insert = "INSERT INTO appointments (email, name, tel, date, time, created_at) VALUES ('" + email + "', '" + name + "', '" + tel + "', '" + date + "', '" + selected + "', '" + created_at + "')";
     // validations
     const validEmail = /\S+@\S+\.\S+/.test(email);
     const validName = /^[A-Za-z\s]+$/.test(name);
 
-    con.query(count, function (err, result) {
+    pool.query(count, function (err, result) {
         if (err) throw err
 
-        if (result.length >= 3) {
+        if (result.rows[0].count > '3') {
             res.status(202).send();
 
         } else if (!email || !name || !tel || !date || !selected || isNaN(tel) == true || validEmail === false || validName === false) {
             res.status(400).send();
 
         } else {
-            con.query(insert, function (err, result) {
+            pool.query(insert, function (err, result) {
                 if (err) throw err
 
                 const appointment = {
