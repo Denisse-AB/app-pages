@@ -19,7 +19,7 @@ router.get('/db', async (req, res) => {
         const client = await pool.connect();
         const result = await client.query('SELECT * FROM test_table');
         const results = { 'results': (result) ? result.rows : null };
-        res.render('pages/db', results);
+        res.staus(200).send(results);
         client.release();
     } catch (err) {
         console.error(err);
@@ -28,6 +28,7 @@ router.get('/db', async (req, res) => {
 });
 
 // Post
+// TODO: add prepared statements.
 router.post('/', (req, res) => {
     const email = req.body.email;
     const name = req.body.name;
