@@ -14,21 +14,15 @@ const pool = new Pool({
     }
 });
 // Get
-router.get('/db', async (req, res) => {
-    try {
-        const client = await pool.connect();
-        const result = await client.query('SELECT * FROM test_table');
-        const results = { 'results': (result) ? result.rows : null };
-        res.status(200).send(results);
-        client.release();
-    } catch (err) {
-        console.error(err);
-        res.send("Error " + err);
-    }
+router.get('/db', (req, res) => {
+    pool.query('SELECT * FROM test_table', (err, results) => {
+        if (err) throw err
+
+        res.status(200).json(results.rows);
+    })
 });
 
 // Post
-// TODO: add prepared statements.
 router.post('/', (req, res) => {
     const email = req.body.email;
     const name = req.body.name;
@@ -37,23 +31,23 @@ router.post('/', (req, res) => {
     const selected = req.body.selected;
     const lang =req.body.lang;
     var created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    const count = "SELECT COUNT(*) FROM appointments WHERE date = '" + date + "' AND time = '" + selected + "'";
-    const insert = "INSERT INTO appointments (email, name, tel, date, time, created_at) VALUES ('" + email + "', '" + name + "', '" + tel + "', '" + date + "', '" + selected + "', '" + created_at + "')";
+    const insert = "INSERT INTO appointments (email, name, tel, date, time, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
+    const values = [email, name, tel, date, selected, created_at];
     // validations
     const validEmail = /\S+@\S+\.\S+/.test(email);
     const validName = /^[A-Za-z\s]+$/.test(name);
 
-    pool.query(count, function (err, result) {
+    pool.query("SELECT COUNT(*) FROM appointments WHERE date = $1 AND time = $2", [date, selected], (err, result) => {
         if (err) throw err
 
-        if (result.rows[0].count > '3') {
+        if (result.rows[0].count >= '3') {
             res.status(202).send();
 
         } else if (!email || !name || !tel || !date || !selected || isNaN(tel) == true || validEmail === false || validName === false) {
             res.status(400).send();
 
         } else {
-            pool.query(insert, function (err, result) {
+            pool.query(insert, values, (err) => {
                 if (err) throw err
 
                 const appointment = {
