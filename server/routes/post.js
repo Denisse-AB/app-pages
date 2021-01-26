@@ -15,7 +15,7 @@ const pool = new Pool({
 });
 // Get
 router.get('/db', (req, res) => {
-    pool.query('SELECT * FROM test_table', (err, results) => {
+    pool.query('SELECT * FROM appointments', (err, results) => {
         if (err) throw err
 
         res.status(200).json(results.rows);
