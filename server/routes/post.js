@@ -14,9 +14,9 @@ const pool = new Pool({
     }
 });
 // Get
-router.get('/db', (req, res) => {
+router.get('/db', (res) => {
     pool.query('SELECT * FROM appointments', (err, results) => {
-        if (err) throw err
+        if (err) throw err;
 
         res.status(200).json(results.rows);
     })
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
     const validName = /^[A-Za-z\s]+$/.test(name);
 
     pool.query("SELECT COUNT(*) FROM appointments WHERE date = $1 AND time = $2", [date, selected], (err, result) => {
-        if (err) throw err
+        if (err) throw err;
 
         if (result.rows[0].count >= '3') {
             res.status(202).send();
@@ -47,8 +47,8 @@ router.post('/', (req, res) => {
             res.status(400).send();
 
         } else {
-            pool.query(insert, values, (err) => {
-                if (err) throw err
+            pool.query(insert, values, async (err) => {
+                if (err) throw err;
 
                 const appointment = {
                     date: date,
@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
 
                 const mailInfo = (lang === 'en') ? en_mailInfo : es_mailInfo;
 
-                mailService.sendMail(mailInfo
+                await mailService.sendMail(mailInfo
                 ).catch(err => {
                     console.log(err);
                 });
