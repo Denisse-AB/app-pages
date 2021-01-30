@@ -12,14 +12,6 @@ You will administer these appointments through your database, it is set up to re
 
 Node.js v14.6.0 | Postgresql database
 
----
-<p align="center">
-  <img src="client\src\assets\screenshot(1).png" width="450" alt="screenshot">
-  <img src="client\src\assets\screenshot(2).png" width="450" alt="screenshot">
-  <img src="client\src\assets\screenshot(3).png" width="450" alt="screenshot">
-  <img src="client\src\assets\screenshot(4).png" width="450" alt="screenshot">
-</p>
-
 ## Installation
 
 - Clone repository
@@ -31,3 +23,10 @@ npm run dev
 cd client
 npm run serve
 ```
+---
+<p align="center">
+  <img src="client\src\assets\screenshot(1).png" width="450" alt="screenshot">
+  <img src="client\src\assets\screenshot(2).png" width="450" alt="screenshot">
+  <img src="client\src\assets\screenshot(3).png" width="450" alt="screenshot">
+  <img src="client\src\assets\screenshot(4).png" width="450" alt="screenshot">
+</p>
