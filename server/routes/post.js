@@ -13,14 +13,6 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 });
-// Get
-router.get('/db', (res) => {
-    pool.query('SELECT * FROM appointments', (err, results) => {
-        if (err) throw err;
-
-        res.status(200).json(results.rows);
-    })
-});
 
 // Post
 router.post('/', (req, res) => {
