@@ -12,8 +12,6 @@ const pool = new Pool({
     ssl: {
         rejectUnauthorized: false
     }
-}).catch(err => {
-    console.log(err);
 });
 
 // Post
