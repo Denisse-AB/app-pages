@@ -8,11 +8,21 @@ const router = express.Router();
 
 // database conection
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT
 });
+
+// get
+router.get('/', (err, res) => {
+    pool.query('SELECT * FROM appointments', (err, results) => {
+        if (err) throw err;
+
+        res.status(200).json(results.rows);
+    })
+})
 
 // Post
 router.post('/', (req, res) => {
@@ -66,10 +76,10 @@ router.post('/', (req, res) => {
 
                 const mailInfo = (lang === 'en') ? en_mailInfo : es_mailInfo;
 
-                await mailService.sendMail(mailInfo
-                ).catch(err => {
-                    console.log(err);
-                });
+                // await mailService.sendMail(mailInfo
+                // ).catch(err => {
+                //     console.log(err);
+                // });
 
                 res.status(201).json({ date: date, time: selected });
             })
