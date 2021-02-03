@@ -18,9 +18,10 @@ Node.js v14.6.0 | Postgresql database
 
 ```javascript
 npm run install
-
 npm run dev
+
 cd client
+npm run install
 npm run serve
 ```
 ---
