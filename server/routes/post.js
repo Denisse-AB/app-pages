@@ -26,12 +26,7 @@ router.get('/', (err, res) => {
 
 // Post
 router.post('/', (req, res) => {
-    const email = req.body.email;
-    const name = req.body.name;
-    const tel = req.body.tel;
-    const date = req.body.date;
-    const selected = req.body.selected;
-    const lang =req.body.lang;
+    const { email, name, tel, date, selected, lang } = req.body
     var created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const insert = "INSERT INTO appointments (email, name, tel, date, time, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
     const values = [email, name, tel, date, selected, created_at];
