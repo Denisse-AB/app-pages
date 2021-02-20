@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
+const { body, validationResult } = require('express-validator');
 const MailService = require("../mail-service");
 const mailService = new MailService();
 
@@ -25,23 +26,30 @@ router.get('/', (err, res) => {
 })
 
 // Post
-router.post('/', (req, res) => {
+router.post('/',
+    // Validation
+    body('email').isEmail().normalizeEmail(),
+    body('name').notEmpty().isString().trim().escape(),
+    body('tel').notEmpty().isNumeric().isLength({ max: 11 }),
+    body('date').notEmpty().isString(),
+    body('selected').notEmpty().isString(),
+    (req, res) => {
+
+    const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).send();
+        }
+
     const { email, name, tel, date, selected, lang } = req.body
     var created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const insert = "INSERT INTO appointments (email, name, tel, date, time, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
     const values = [email, name, tel, date, selected, created_at];
-    // validations
-    const validEmail = /\S+@\S+\.\S+/.test(email);
-    const validName = /^[A-Za-z\s]+$/.test(name);
 
     pool.query("SELECT COUNT(*) FROM appointments WHERE date = $1 AND time = $2", [date, selected], (err, result) => {
         if (err) throw err;
 
         if (result.rows[0].count >= '3') {
             res.status(202).send();
-
-        } else if (!email || !name || !tel || !date || !selected || isNaN(tel) == true || validEmail === false || validName === false) {
-            res.status(400).send();
 
         } else {
             pool.query(insert, values, async (err) => {
