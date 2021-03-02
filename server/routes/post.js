@@ -17,12 +17,13 @@ const pool = new Pool({
 });
 
 // get
-router.get('/', (err, res) => {
-    pool.query('SELECT * FROM appointments', (err, results) => {
-        if (err) throw err;
-
-        res.status(200).json(results.rows);
-    })
+router.get('/', async (err, res) => {
+    try {
+        const results = await pool.query('SELECT * FROM appointments')
+        res.status(200).json(results.rows)
+    } catch (err) {
+        if (err) throw err
+    }
 })
 
 // Post
