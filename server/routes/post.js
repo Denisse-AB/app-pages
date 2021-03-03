@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
-const { body, validationResult } = require('express-validator');
 const { validationRules, validate } = require('../validation/validation');
 const MailService = require("../mail-service");
 const mailService = new MailService();
