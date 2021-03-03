@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
 const { body, validationResult } = require('express-validator');
+const { validationRules, validate } = require('../validation/validation');
 const MailService = require("../mail-service");
 const mailService = new MailService();
 
@@ -27,20 +28,7 @@ router.get('/', async (err, res) => {
 })
 
 // Post
-router.post('/',
-    // Validation
-    body('email').isEmail().normalizeEmail(),
-    body('name').notEmpty().isString().trim().escape(),
-    body('tel').notEmpty().isNumeric().isLength({ max: 11 }),
-    body('date').notEmpty().isString(),
-    body('selected').notEmpty().isString(),
-    (req, res) => {
-
-    const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).send();
-        }
-
+router.post('/', validationRules(), validate, (req, res) => {
     const { email, name, tel, date, selected, lang } = req.body
     var created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const insert = "INSERT INTO appointments (email, name, tel, date, time, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
