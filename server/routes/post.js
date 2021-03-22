@@ -37,7 +37,7 @@ router.post('/', validationRules(), validate, (req, res) => {
         if (err) throw err;
 
         if (result.rows[0].count >= '3') {
-            res.status(202).send();
+            res.sendStatus(202);
 
         } else {
             pool.query(insert, values, async (err) => {
