@@ -13,9 +13,9 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
-    "core-js": "^3.13.1",
-    "vee-validate": "^3.4.8",
-    "vue": "^2.6.13",
+    "core-js": "^3.14.0",
+    "vee-validate": "^3.4.9",
+    "vue": "^2.6.14",
     "vue-i18n": "^8.24.4"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.13"
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
