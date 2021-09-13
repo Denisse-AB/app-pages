@@ -169,26 +169,24 @@ export default {
       this.data = {}
 
       try {
-        await PostService.insertPost(
-          this.email, this.name, this.date, this.tel, this.selected, this.lang
+        const res = await PostService.insertPost(
+          this.email, this.name, this.date, this.tel, this.selected, this.lang)
 
-        ).then(res => {
-          if (res.status === 201) {
-            this.email = ''
-            this.name = ''
-            this.date = ''
-            this.tel = ''
-            this.selected = ''
-            this.card = false
-            this.spinner = false
-            this.icon = true
-            this.response = false
-            this.data = res.data
-          } else {
-            this.spinner = false
-            this.response = true
-          }
-        })
+        if (res.status === 201) {
+          this.email = ''
+          this.name = ''
+          this.date = ''
+          this.tel = ''
+          this.selected = ''
+          this.card = false
+          this.spinner = false
+          this.icon = true
+          this.response = false
+          this.data = res.data
+        } else {
+          this.spinner = false
+          this.response = true
+        }
       } catch (err) {
         alert(this.$t('alert'))
         this.spinner = false
@@ -196,7 +194,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

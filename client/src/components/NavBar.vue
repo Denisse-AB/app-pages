@@ -24,6 +24,7 @@ import AppForm from '../components/AppForm.vue'
 
 export default {
   name: 'Navbar',
+
   components: {
     AppForm
   },
@@ -36,8 +37,9 @@ export default {
       ]
     }
   },
+
   methods: {
-    changeLocale (locale) {
+    changeLocale (_locale) {
       this.$i18n.locale = this.$i18n.locale === 'en' ? 'es' : 'en'
     }
   }
