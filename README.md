@@ -31,3 +31,8 @@ npm run serve
   <img src="client\src\assets\screenshot(3).png" width="450" alt="screenshot">
   <img src="client\src\assets\screenshot(4).png" width="450" alt="screenshot">
 </p>
+
+## Donation
+If you like this project, buy me a cup of :coffee: :wink:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?business=263QJ8D5YHR8E&no_recurring=0&item_name=I+believe+in+open+source%2C+but+a+little+donation+will+be+appreciated.+Thanks%21&currency_code=USD)
