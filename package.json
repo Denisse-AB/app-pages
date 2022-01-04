@@ -9,6 +9,7 @@
   },
   "author": "Denisse Abreu",
   "license": "MIT",
+  "funding": "https://www.paypal.com/donate?business=263QJ8D5YHR8E&no_recurring=0&item_name=I+believe+in+open+source%2C+but+a+little+donation+will+be+appreciated.+Thanks%21&currency_code=USD",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
@@ -22,6 +23,6 @@
     "nodemon": "^2.0.15"
   },
   "engines": {
-    "node": "^14.6.0"
+    "node": ">=16.13.1"
   }
 }

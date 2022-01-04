@@ -10,7 +10,7 @@ You will administer these appointments through your database, it is set up to re
 
 ## Requirements
 
-Node.js v14.6.0 | Postgresql database
+Node.js ^16.13.1 | Postgresql database
 
 ## Installation
 
