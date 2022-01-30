@@ -92,7 +92,7 @@
           <p id="icon"><font-awesome-icon class="text-success" icon="check-circle" /> {{ $t('thankyou')}}!</p>
           <h5 class="offset-3 msg">{{ $t('check')}} !</h5>
           <hr>
-          <p class="mt-4">{{ $t('day')}} <strong>{{ data.date }}</strong> {{ $t('time')}} <strong>{{ data.time }}</strong></p>
+          <p class="mt-4">{{ $t('day')}} <strong>{{ date }}</strong> {{ $t('time')}} <strong>{{ selected }}</strong></p>
         </div>
       </b-card>
       <p v-show="response" class="text-danger font-weight-bold mb-0 mt-2">
@@ -138,7 +138,6 @@ export default {
       card: true,
       icon: false,
       response: false,
-      data: {},
       email: '',
       name: '',
       date: '',
@@ -166,26 +165,27 @@ export default {
 
     async Submit () {
       this.spinner = true
-      this.data = {}
 
       try {
-        const res = await PostService.insertPost(
-          this.email, this.name, this.date, this.tel, this.selected, this.lang)
+        const { email, name, date, tel, selected, lang } = this
 
-        if (res.status === 201) {
-          this.email = ''
-          this.name = ''
-          this.date = ''
-          this.tel = ''
-          this.selected = ''
-          this.card = false
-          this.spinner = false
-          this.icon = true
-          this.response = false
-          this.data = res.data
+        if (email && name && date && tel && selected && lang) {
+          const res = await PostService.insertPost(
+            this.email, this.name, this.date, this.tel, this.selected, this.lang)
+
+          if (res) {
+            this.email = ''
+            this.name = ''
+            this.date = res.date
+            this.tel = ''
+            this.selected = res.selected
+            this.card = false
+            this.spinner = false
+            this.icon = true
+            this.response = false
+          }
         } else {
           this.spinner = false
-          this.response = true
         }
       } catch (err) {
         alert(this.$t('alert'))
