@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/appointments-SPA/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/app-pages/' : '/',
   devServer: {
     proxy: {
       '/post': {
