@@ -7,7 +7,7 @@ const mailService = new MailService();
 
 const router = express.Router();
 
-// database conection
+// database connection
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
