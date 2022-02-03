@@ -2,7 +2,7 @@
   <div>
       <b-navbar id="fixed" variant="light" class="shadow fixed-top " type="light">
         <b-navbar-nav>
-          <b-nav-item href="/">{{ $t('home')}}</b-nav-item>
+          <b-nav-item @click="reload">{{ $t('home')}}</b-nav-item>
         <!-- logo -->
         </b-navbar-nav>
             <b-navbar-brand class="mx-auto" href="/">
@@ -39,6 +39,9 @@ export default {
   },
 
   methods: {
+    reload () {
+      location.reload()
+    },
     changeLocale (_locale) {
       this.$i18n.locale = this.$i18n.locale === 'en' ? 'es' : 'en'
     }
